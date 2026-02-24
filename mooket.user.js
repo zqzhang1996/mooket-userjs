@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mooket
 // @namespace    http://tampermonkey.net/
-// @version      20251026.1.1
+// @version      20260224.1.1
 // @description  银河奶牛历史价格（包含强化物品）history(enhancement included) price for milkywayidle
 // @author       IOMisaka
 // @match        https://www.milkywayidle.com/*
@@ -140,7 +140,7 @@
   });
   async function patchScript() {
     try {
-      window[injectSpace].game = (e => e?.[Object.keys(e).find(k => k.startsWith('__reactFiber$'))]?.return?.stateNode)(document.querySelector('[class^="GamePage"]'));
+      window[injectSpace].game = (e => e?.[Reflect.ownKeys(e).find(k => k.startsWith('__reactFiber$'))]?.return?.stateNode)(document.querySelector('[class^="GamePage"]'));
       window[injectSpace].lang = window[injectSpace].game.props.i18n.options.resources;
       console.info('MWICore patched successfully.')
     } catch (error) {
